@@ -6,7 +6,7 @@ async def task(name, delay):
     print(f"Task {name} finished")
     return f"Result-{name}"
 
-async def main():
+async def test_main():
     # 并发运行 3 个任务
     results = await asyncio.gather(
         task("A", 2),
@@ -15,4 +15,4 @@ async def main():
     )
     print("All done:", results)  # 输出所有任务的结果
 
-asyncio.run(main())
+asyncio.run(test_main())
