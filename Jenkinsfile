@@ -16,6 +16,7 @@ pipeline {
                             sh """
                             ssh -o StrictHostKeyChecking=no root@${REMOTE_SERVER} << 'ENDSSH'
                                 cd ${PROJECT_DIR}
+                                mkdir -p ${PROJECT_DIR}
                                 git pull origin master
                                 python3.6 -m pytest testcases/unit_tests/test.py --maxfail=1 --disable-warnings -q
                             ENDSSH
