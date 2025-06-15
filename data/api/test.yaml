@@ -1,0 +1,19 @@
+# 成功场景
+- case_doc: 新增数据布控(必传)
+  req_data:
+    monitorName: 数据布控
+    monitorStatus: 1
+    monitorTimeE: 3602345678901
+  exp_code: 00000000
+  exp_msg: 请求处理成功
+  assert_type: success_db_check  # 断言类型标识
+
+# 失败场景：参数越界
+- case_doc: monitorName=129位，越界
+  req_data:
+    monitorName: ${char129}  # 引用公共变量，需在 base_config.yaml 中定义
+    monitorStatus: 1
+    monitorTimeE: 3602345678901
+  exp_code: 00000100
+  exp_msg: 请求参数无效
+  assert_type: error_param_check
