@@ -111,7 +111,6 @@ pipeline {
                 always {
                     junit testResults: 'test-results.xml',
                           allowEmptyResults: true,
-                          testDataPublishers: [],
                           skipPublishingChecks: true,
                           skipMarkingBuildUnstable: true
 
