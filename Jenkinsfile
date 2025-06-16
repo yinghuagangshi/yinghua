@@ -116,7 +116,7 @@ pipeline {
                 <p><strong>触发原因:</strong> ${currentBuild.getBuildCauses()[0].shortDescription}</p>
                 <p><strong>控制台日志:</strong> <a href="${env.BUILD_URL}">点击查看</a></p>
                 <p><strong>测试概要:</strong></p>
-                <pre>${manager.build.log}</pre>
+                <pre>${currentBuild.rawBuild.getLog(100).join("\n")}</pre>
                 """,
                 to: "${env.EMAIL_RECIPIENTS}",
                 replyTo: "${env.EMAIL_REPLY_TO}",
