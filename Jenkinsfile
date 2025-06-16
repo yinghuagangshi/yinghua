@@ -6,7 +6,7 @@ pipeline {
         PROJECT_DIR = '/root/yinghua'
         GIT_REPO = 'https://gitee.com/yinghuagangshi/yinghua.git'
         PYTHON_CMD = '/usr/bin/python3.6'  // 使用绝对路径
-        TEST_FILE = 'testcases/unit_tests/test.py'
+        TEST_FILE = 'testcases/unit_tests/test_common.py'
     }
 
     stages {
@@ -78,8 +78,7 @@ pipeline {
                         cd ${PROJECT_DIR}
                         ${PYTHON_CMD} -m pytest ${TEST_FILE} \
                             --junitxml=test-results.xml \
-                            --asyncio-mode=auto \
-                            -v
+                                                    -v
                     '
                     """
                 }
