@@ -23,18 +23,19 @@ pipeline {
                 sshagent(credentials: ['ssh_root_credentials']) {
                     sh """
                     ssh -T -o StrictHostKeyChecking=no root@${REMOTE_SERVER} '
-                    set -ex
-                    echo "=== 强制拉取代码（覆盖本地修改）==="
-                    mkdir -p ${PROJECT_DIR}
-                    cd ${PROJECT_DIR}
-                    if [ ! -d .git ]; then
-                        git clone ${GIT_REPO} .
-                    else
-                        git fetch --all
-                        git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
-                    fi
-                    echo "代码版本: \$(git rev-parse --short HEAD)"
-'
+                        set -ex
+                        echo "=== 拉取代码 ==="
+                        mkdir -p ${PROJECT_DIR}
+                        cd ${PROJECT_DIR}
+                        if [ ! -d .git ]; then
+                            git clone ${GIT_REPO} .
+                        else
+                            git fetch --all
+                            git checkout -B master
+                            git reset --hard origin/master  
+                        fi
+                        echo "代码版本: \$(git rev-parse --short HEAD)"
+                    '
                     """
                 }
             }
