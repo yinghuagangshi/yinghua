@@ -111,7 +111,7 @@ pipeline {
                 always {
                     junit testResults: 'test-results.xml',
                           allowEmptyResults: true,
-                          skipPublishingChecks: true,
+                          //skipPublishingChecks: true,
                           skipMarkingBuildUnstable: true
 
                     // 生成Allure报告
