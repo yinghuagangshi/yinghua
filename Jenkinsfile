@@ -109,9 +109,9 @@ pipeline {
             }
             post {
                 always {
-                    junit testResults: 'test-results.xml',
+                    junit testResults: 'reports/test-results.xml',
                           allowEmptyResults: true,
-                          //skipPublishingChecks: true,
+                          skipPublishingChecks: true,
                           skipMarkingBuildUnstable: true
 
                     // 生成Allure报告
