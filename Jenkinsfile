@@ -1,11 +1,17 @@
 pipeline {
     agent any
     environment {
+        // 远程服务器配置
         REMOTE_SERVER = '47.97.37.145'
         PROJECT_DIR = '/root/yinghua'
         GIT_REPO = 'https://gitee.com/yinghuagangshi/yinghua.git'
         PYTHON_CMD = '/usr/bin/python3.6'
         TEST_FILE = 'testcases/unit_tests/test_common.py'
+
+        // 邮件配置
+        EMAIL_RECIPIENTS = 'slg112511@163.com'      // 收件人
+        EMAIL_REPLY_TO = 'shilingang111@163.com'    // 发件人（回复地址）
+        EMAIL_CREDENTIALS_ID = 'email-credential'   // Jenkins SMTP 凭据 ID
     }
 
     stages {
@@ -97,14 +103,26 @@ pipeline {
 
     post {
         always {
-            echo "测试执行完成. 结果: ${currentBuild.currentResult}"
-            script {
-                if (currentBuild.currentResult == 'UNSTABLE') {
-                    currentBuild.result = 'SUCCESS'
-                }
-            }
+            // 清理工作空间
             cleanWs()
-        }
 
+            // 发送邮件通知
+            emailext (
+                subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                body: """
+                <h2>${env.JOB_NAME} 构建结果</h2>
+                <p><strong>状态:</strong> <span style="color: ${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'}">${currentBuild.currentResult}</span></p>
+                <p><strong>构建编号:</strong> ${env.BUILD_NUMBER}</p>
+                <p><strong>触发原因:</strong> ${currentBuild.getBuildCauses()[0].shortDescription}</p>
+                <p><strong>控制台日志:</strong> <a href="${env.BUILD_URL}">点击查看</a></p>
+                <p><strong>测试概要:</strong></p>
+                <pre>${manager.build.log}</pre>
+                """,
+                to: "${env.EMAIL_RECIPIENTS}",
+                replyTo: "${env.EMAIL_REPLY_TO}",
+                credentialsId: "${env.EMAIL_CREDENTIALS_ID}",
+                mimeType: "text/html"
+            )
+        }
     }
 }
