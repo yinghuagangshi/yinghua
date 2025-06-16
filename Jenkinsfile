@@ -5,7 +5,7 @@ pipeline {
         REMOTE_SERVER = '47.97.37.145'          // 远程服务器IP
         PROJECT_DIR = '/root/yinghua'           // 项目部署目录
         GIT_REPO = 'https://gitee.com/yinghuagangshi/yinghua.git'  // Gitee仓库地址
-        PYTHON_CMD = 'python3.6'                // Python命令
+        PYTHON_CMD = '/usr/bin/python3.6'                // Python命令
         TEST_FILE = 'testcases/unit_tests/test.py'             // 测试文件名
     }
 
