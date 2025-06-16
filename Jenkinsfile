@@ -106,23 +106,38 @@ pipeline {
             // 清理工作空间
             cleanWs()
 
-            // 发送邮件通知
-            emailext (
-                subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
-                body: """
-                <h2>${env.JOB_NAME} 构建结果</h2>
-                <p><strong>状态:</strong> <span style="color: ${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'}">${currentBuild.currentResult}</span></p>
-                <p><strong>构建编号:</strong> ${env.BUILD_NUMBER}</p>
-                <p><strong>触发原因:</strong> ${currentBuild.getBuildCauses()[0].shortDescription}</p>
-                <p><strong>控制台日志:</strong> <a href="${env.BUILD_URL}">点击查看</a></p>
-                <p><strong>测试概要:</strong></p>
-                <pre>${currentBuild.rawBuild.getLog(100).join("\n")}</pre>
-                """,
-                to: "${env.EMAIL_RECIPIENTS}",
-                replyTo: "${env.EMAIL_REPLY_TO}",
-                credentialsId: "${env.EMAIL_CREDENTIALS_ID}",
-                mimeType: "text/html"
-            )
+            // 发送邮件通知（安全版本）
+            script {
+                // 获取测试结果摘要
+                def testSummary = ""
+                try {
+                    def testResult = junit testResults: 'test-results.xml', allowEmptyResults: true
+                    testSummary = "测试通过: ${testResult.totalCount - testResult.failCount}/${testResult.totalCount}"
+                } catch(e) {
+                    testSummary = "测试结果解析失败: ${e.getMessage()}"
+                }
+
+                // 发送邮件
+                emailext (
+                    subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                    body: """
+                    <h2>${env.JOB_NAME} 构建结果</h2>
+                    <p><strong>状态:</strong>
+                       <span style="color: ${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'}">
+                       ${currentBuild.currentResult}
+                       </span>
+                    </p>
+                    <p><strong>构建编号:</strong> ${env.BUILD_NUMBER}</p>
+                    <p><strong>触发原因:</strong> ${currentBuild.getBuildCauses()[0].shortDescription}</p>
+                    <p><strong>测试摘要:</strong> ${testSummary}</p>
+                    <p><strong>控制台日志:</strong> <a href="${env.BUILD_URL}">点击查看完整日志</a></p>
+                    """,
+                    to: "${env.EMAIL_RECIPIENTS}",
+                    replyTo: "${env.EMAIL_REPLY_TO}",
+                    credentialsId: "${env.EMAIL_CREDENTIALS_ID}",
+                    mimeType: "text/html"
+                )
+            }
         }
     }
 }
