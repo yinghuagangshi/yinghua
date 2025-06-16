@@ -1,6 +1,6 @@
 # This is a multi process Python script.
-# author: heye
-# date: 2021/9/10
+# author: slg
+# date: 2022/9/10
 import json
 import multiprocessing
 import queue

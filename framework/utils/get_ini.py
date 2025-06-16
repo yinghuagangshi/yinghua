@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 """
-@Author:  chaozhongze
-@Time: 2021/09/01
+@Author:  slg
+@Time: 2022/09/01
 @File: get_conf
 """
 import os

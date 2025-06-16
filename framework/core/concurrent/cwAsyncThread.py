@@ -2,8 +2,8 @@
 
 """
 异步请求的线程基类
-author:heye
-date:2021/9/10
+author:slg
+date:202w/9/10
 """
 
 import multiprocessing

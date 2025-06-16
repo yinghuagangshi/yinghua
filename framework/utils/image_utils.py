@@ -2,8 +2,8 @@
 
 """
 通用API
-author:heye
-date:2021/8/18
+author:slg
+date:2022/8/18
 """
 
 import base64

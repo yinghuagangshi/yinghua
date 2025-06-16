@@ -1,7 +1,7 @@
 # async_oauth.py
 """
 异步请求认证
-author:heye
+author:slg
 """
 
 import uuid

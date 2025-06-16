@@ -6,7 +6,7 @@ pipeline {
         PROJECT_DIR = '/root/yinghua'
         GIT_REPO = 'https://gitee.com/yinghuagangshi/yinghua.git'
         PYTHON_CMD = '/usr/bin/python3.6'
-        TEST_FILE = 'testcases/unit_tests/test_common.py'
+        TEST_FILE = 'testcases/unit_tests/test_example.py'
 
         // 邮件配置
         EMAIL_RECIPIENTS = 'slg112511@163.com'      // 收件人

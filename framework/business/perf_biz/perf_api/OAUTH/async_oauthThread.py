@@ -2,7 +2,7 @@
 """
 request thread
 多线程内部开启 http异步请求
-author:heye
+author:slg
 """
 
 

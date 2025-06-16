@@ -1,5 +1,5 @@
 """
-author: heye
+author: slg
 """
 
 from OCR import ocrThread

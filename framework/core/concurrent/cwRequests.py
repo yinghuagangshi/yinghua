@@ -2,8 +2,8 @@
 
 """
 通用API
-author:heye
-date:2021/9/10
+author:slg
+date:2022/9/10
 """
 
 import requests
