@@ -101,15 +101,15 @@ pipeline {
                     '
                     """
                     // 将测试结果文件从远程服务器复制到本地
-//                     sh """
-//                     scp -o StrictHostKeyChecking=no -r root@${REMOTE_SERVER}:${PROJECT_DIR}/${ALLURE_RESULTS} .
-//                     scp -o StrictHostKeyChecking=no root@${REMOTE_SERVER}:${PROJECT_DIR}/reports/test-results.xml .
-//                     """
+                    sh """
+                    scp -o StrictHostKeyChecking=no -r root@${REMOTE_SERVER}:${PROJECT_DIR}/${ALLURE_RESULTS} .
+                    scp -o StrictHostKeyChecking=no root@${REMOTE_SERVER}:${PROJECT_DIR}/reports/test-results.xml .
+                    """
                 }
             }
             post {
                 always {
-                    junit testResults: 'reports/test-results.xml',
+                    junit testResults: 'test-results.xml',
                           allowEmptyResults: true,
                           skipPublishingChecks: true,
                           skipMarkingBuildUnstable: true
