@@ -32,7 +32,7 @@ pipeline {
                         else
                             git fetch --all
                             git checkout -B master
-                            git reset --hard origin/master  
+                            git reset --hard origin/master
                         fi
                         echo "代码版本: \$(git rev-parse --short HEAD)"
                     '
@@ -111,6 +111,7 @@ pipeline {
                 always {
                     junit testResults: 'test-results.xml',
                           allowEmptyResults: true,
+                          skipPublishingChecks: true,
                           skipMarkingBuildUnstable: true
 
                     // 生成Allure报告
