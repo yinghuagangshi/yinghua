@@ -22,3 +22,4 @@ class TestLogin:
     def test_login_fail(self):
         allure.dynamic.description("这是一个动态描述的示例")  # 动态添加描述
         assert 1 == 1
+

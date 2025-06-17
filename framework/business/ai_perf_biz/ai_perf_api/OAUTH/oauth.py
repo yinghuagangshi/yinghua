@@ -7,11 +7,11 @@ from urllib import parse
 import time
 import sys
 sys.path.append("..")
-import common.cwRequests as httpRequests
+import framework.core.concurrent.cwRequests as httpRequests
 if __name__ == '__main__':
     import cryptSMx as crypt
 else:
-    import OAUTH.cryptSMx as crypt
+    import framework.utils.cryptSMx as crypt
 
 class oauth(httpRequests.cwRequests):
     def get_token(self, url, appkey, appsecret):

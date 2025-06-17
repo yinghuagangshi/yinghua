@@ -9,12 +9,12 @@ from urllib import parse
 from time import time
 import sys
 sys.path.append("..")
-import common.common as comAPI
-import common.cwAsyncRequests as http
+
+import framework.core.concurrent.cwAsyncRequests as http
 if __name__ == '__main__':
     import cryptSMx as crypt
 else:
-    import OAUTH.cryptSMx as crypt
+    import framework.utils.cryptSMx as crypt
 
 
 class oauth(http.cwRequests):

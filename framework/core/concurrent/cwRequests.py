@@ -111,7 +111,7 @@ class cwRequests:
 if __name__ == '__main__':
     json_data = {'img': 'aaaaaa'}
     json_headers = {'content-type': "application/json"}
-    url = "http://10.128.162.176:32345/ocr/idcard"
+    url = "http://localhost:5000/ocr/idcard"
     testObj = cwRequests()
     ret = testObj.get(url, json_data, json_headers)
     print(testObj.get_data())

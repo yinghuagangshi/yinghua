@@ -12,11 +12,11 @@ import logging
 
 if __name__ == '__main__':
     import multiprocessing
-    import image_utils as comAPI
+    import framework.utils.image_utils as comAPI
 else:
     import sys
     sys.path.append("..")
-    import image_utils.common as comAPI
+    import framework.utils.image_utils as comAPI
 
 # 同步base thread，具体业务需重载todo_request
 class cwThread(threading.Thread):
@@ -64,7 +64,7 @@ class cwThread(threading.Thread):
         self.showlog(logging.INFO, "需要重载todo_request()，实现实际功能")
         return True
 
-    # 保存log，保持日志到multiprocessing.JoinableQueue()
+    # 保存log，保存日志到multiprocessing.JoinableQueue()
     def showlog(self, level, title,  *args):
         """
         :param level: level 等级
@@ -174,7 +174,7 @@ class cwThread(threading.Thread):
 if __name__ == '__main__':
     outQueue = multiprocessing.JoinableQueue()
     condition_obj = multiprocessing.Condition()
-    testObj = cwThread(outQueue, 2)
+    testObj = cwThread(outQueue, 1)
     testObj.set_condition(condition_obj)
     testObj.loadimagefiles("d:\\id.jpg")
     testObj.set_debug(False)

@@ -9,6 +9,7 @@ date:2022/8/18
 import base64
 import os
 import re
+from stat import S_ISDIR, S_ISREG
 
 # 是否图片文件
 def is_image_file(file_name):
@@ -104,3 +105,10 @@ def round_robin_sublists(ls, splitcount=4):
         lists[i].append(elem)
         i = (i + 1) % splitcount
     return lists
+
+
+if __name__ == '__main__':
+    list = folders_list_images(r"E:\自动化\auto_2025\yinghua\data\ai_perf")
+    for i in list:
+        print(i)
+

@@ -16,5 +16,6 @@ class ocr(http.cwRequests):
             return "read_image error"
 
         dict['img'] = comAPI.base64_encode(img_data)
+        dict['imgID'] = image_file
         json_str = json.dumps(dict)
         return await self.get(url, json_str)

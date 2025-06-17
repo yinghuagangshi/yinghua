@@ -10,13 +10,13 @@ import logging
 import json
 import sys
 sys.path.append("..")
-import common.cwAsyncThread as thread_module1
+import framework.core.concurrent.cwAsyncThread as thread_module1
 
 if __name__ == '__main__':
     import multiprocessing
     import async_oauth as auth
 else:
-    import OAUTH.async_oauth as auth
+    import framework.business.ai_perf_biz.ai_perf_api.OAUTH.async_oauth as auth
 
 
 class authThread(thread_module1.cwThread):

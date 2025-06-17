@@ -6,7 +6,7 @@ import json
 
 import sys
 sys.path.append("..")
-import common.common as comAPI
+import framework.utils.image_utils as comAPI
 import framework.core.concurrent.cwRequests as httpRequests
 
 #继承同步base http request
@@ -20,6 +20,7 @@ class ocr(httpRequests.cwRequests):
             return None
 
         dict['img'] = comAPI.base64_encode(img_data)
+        dict['imgID'] = image_file
    
         json_str = json.dumps(dict)
 

@@ -7,13 +7,13 @@ request thread
 import logging
 import sys
 sys.path.append("..")
-import common.cwAsyncThread as thread_module1
+import framework.core.concurrent.cwAsyncThread as thread_module1
 
 if __name__ == '__main__':
     import multiprocessing
     import async_ocr as ocr
 else:
-    import OCR.async_ocr as ocr
+    import framework.business.ai_perf_biz.ai_perf_api.OCR.async_ocr as ocr
 
 # 继承异步Thread类，todo_request调用异步ocr
 class ocrThread(thread_module1.cwThread):
@@ -34,9 +34,9 @@ class ocrThread(thread_module1.cwThread):
 if __name__ == '__main__':
     outQueue = multiprocessing.JoinableQueue()
     condition_obj = multiprocessing.Condition()
-    myThread = ocrThread(outQueue, 2)
-    myThread.set_url("http://10.128.162.176:32345/ocr/idcard")
-    myThread.loadimagefiles("D:\\id.jpg")
+    myThread = ocrThread(outQueue, 1)
+    myThread.set_url("http://localhost:5000/ocr/idcard")
+    myThread.loadimagefiles(r"E:\自动化\auto_2025\yinghua\data\ai_perf" )
     myThread.set_condition(condition_obj)
     myThread.set_debug(True)
     myThread.start()

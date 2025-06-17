@@ -7,12 +7,12 @@ request thread
 import logging
 import sys
 sys.path.append("..")
-import common.cwThread as  thread_module
+import framework.core.concurrent.cwThread as  thread_module
 if __name__ == '__main__':
     import multiprocessing
     import oauth as auth
 else:
-    import OAUTH.oauth as auth
+    import framework.business.ai_perf_biz.ai_perf_api.OAUTH.oauth as auth
 
 
 class authThread(thread_module.cwThread):

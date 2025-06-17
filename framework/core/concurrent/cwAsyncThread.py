@@ -17,7 +17,7 @@ if __name__ == '__main__':
 else:
     import sys
     sys.path.append("..")
-    import image_utils.cwThread as  thread_module
+    import framework.core.concurrent.cwThread as  thread_module
 
 # 异步base thread，继承同步base thread
 class cwThread(thread_module.cwThread):
@@ -40,19 +40,22 @@ class cwThread(thread_module.cwThread):
 
     # 可以重载此函数，处理结果：协程内异常/正常结果需通过 done_callback 捕获，自动回调
     def done_callback(self, future):
-        if future.exception():
-            self.showlog(logging.ERROR, "抛出异常" )
-        elif future.cancelled():
-            self.showlog(logging.WARN, "请求被取消")
-        else:
-            if future.result() != None:
-                self.showlog(logging.INFO, "异步请求结果", json.loads(future.result()) )
-                # try:
-                #     result = json.loads(future.result())
-                # except ValueError as e:
-                #     self.showlog(logging.ERROR, "JSON解析失败", str(e))
+        try:
+            if future.exception():
+                self.showlog(logging.ERROR, "抛出异常" )
+            elif future.cancelled():
+                self.showlog(logging.WARN, "请求被取消")
             else:
-                self.showlog(logging.WARN, "异步请求结果为空")
+                if future.result() != None:
+                    self.showlog(logging.INFO, "异步请求结果", json.loads(future.result()) )
+                    # try:
+                    #     result = json.loads(future.result())
+                    # except ValueError as e:
+                    #     self.showlog(logging.ERROR, "JSON解析失败", str(e))
+                else:
+                    self.showlog(logging.WARN, "异步请求结果为空")
+        except Exception as e:  # 显式捕获连接重置错误
+            self.showlog(logging.CRITICAL, f"回调处理发生意外错误: {str(e)}")
 
     #重写同步base thread类的run方法
     def run(self):

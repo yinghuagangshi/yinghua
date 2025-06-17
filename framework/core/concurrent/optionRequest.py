@@ -2,10 +2,10 @@
 author: slg
 """
 
-from OCR import ocrThread
-from OCR import async_ocrThread
-from OAUTH import oauthThread
-from OAUTH import async_oauthThread
+from framework.business.ai_perf_biz.ai_perf_api.OCR import ocrThread
+from framework.business.ai_perf_biz.ai_perf_api.OCR import async_ocrThread
+from framework.business.ai_perf_biz.ai_perf_api.OAUTH import oauthThread
+from framework.business.ai_perf_biz.ai_perf_api.OAUTH import async_oauthThread
 
 def choice(request_type, out_queue, condition, **args):
     if request_type == "OCR":

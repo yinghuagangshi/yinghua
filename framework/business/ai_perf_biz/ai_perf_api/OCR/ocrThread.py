@@ -13,7 +13,7 @@ if __name__ == '__main__':
     import multiprocessing
     import ocr
 else:
-    import OCR.ocr as ocr
+    import framework.business.ai_perf_biz.ai_perf_api.OCR.ocr as ocr
 
 # 继承同步base thread，调用同步ocr
 class ocrThread(thread_module.cwThread):
