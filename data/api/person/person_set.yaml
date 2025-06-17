@@ -1,0 +1,12 @@
+topic: test-person
+deviceId:
+alarmInterval: 60000
+eventDuration: 290
+task:
+  outputType:
+  scheduleType: 0
+  roiInfos:
+    - roiId:
+      targetTypes: [1]
+      peopleNumberMaxThresgold:
+      peopleNumberMinThresgold:

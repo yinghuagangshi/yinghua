@@ -5,8 +5,8 @@
 @Time: 2022/10/18
 @File: person_api
 """
-from comm.api_fun import ApiFun
-from comm.get_conf import Conf
+from framework.core.http.http_client import api
+from framework.utils.get_ini_conf import Conf
 
 
 class PersonApi():
@@ -17,32 +17,33 @@ class PersonApi():
     _task_set = Conf().get_str('task_api', 'person_set')
     _task_del = Conf().get_str('task_api', 'person_del')
 
+
+    @api.mark(module='ocean')
+    @api.http.post(path=_roi_set)
     def person_roi_api(self, data):
         '''
         头肩解析roi设置
         :param data:
         :return:
         '''
-        path = self._roi_set
-        res = ApiFun().send_post(path, data)
-        return res
+        return dict(json=data)
 
+    @api.mark(module='ocean')
+    @api.http.post(path=_task_set)
     def person_set_api(self, data):
         '''
         设置头肩解析任务
         :param: data
         :return:
         '''
-        path = self._task_set
-        res = ApiFun().send_post(path, data)
-        return res
+        return dict(json=data)
 
+    @api.mark(module='ocean')
+    @api.http.post(path=_task_del)
     def person_del_api(self, data):
         '''
         删除头肩解析任务
         :param data:
         :return:
         '''
-        path = self._task_del
-        res = ApiFun().send_post(path, data)
-        return res
+        return dict(json=data)

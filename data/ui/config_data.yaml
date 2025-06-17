@@ -1,0 +1,8 @@
+AddUserPage:
+  wait_login: "l,签退"
+  add_page: 'http://127.0.0.1/ranzhi/sys/user-create.html'
+  iframe: 'i,iframe-superadmin'
+Login_test:
+  login_path: 'C:\Users\ranzhi_test\config\ranzhi_login.xlsx'
+  login_sucess_sheet: 'login_sucess'
+  login_fail_sheet: 'login_fail'

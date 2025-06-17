@@ -1,5 +1,6 @@
 from multiprocessing import Pool
 import asyncio
+import aiohttp
 
 async def async_worker(url):
     async with aiohttp.ClientSession() as session:

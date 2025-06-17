@@ -6,17 +6,16 @@
 @File: test_person
 """
 import os
-
 from loguru import logger
 
-from apis.device_api import deviceid
-from apis.person_api import PersonApi
-from comm.file_io import Fileio
-from comm.get_conf import Conf
-from comm.get_yaml import GetYaml
+from framework.business.api_biz.api_services.device_api import deviceid
+from framework.business.api_biz.api_services.person_api import PersonApi
+from framework.utils.file_io import Fileio
+from framework.utils.get_ini_conf import Conf
+from framework.utils.file_utils import YamlReader
 
 
-class task_person():
+class Task_person():
     '''
     行为分析任务模块
     '''
@@ -30,10 +29,10 @@ class task_person():
                     19:睡岗20:打哈欠22:推搡23:打砸24:打盹25:翻越栏杆28:聚集
         args：roi参数，不传使用默认roi
         '''
-        roi_param = GetYaml().yaml_json('datas\\person\\person_roi.yaml')
-        set_param = GetYaml().yaml_json('datas\\person\\person_set.yaml')
-        set_param2 = GetYaml().yaml_json('datas\\person\\person_set2.yaml')
-        i = deviceid(name)
+        roi_param = YamlReader.read_yaml('data\\api\\person\\person_roi.yaml')
+        set_param = YamlReader.read_yaml('data\\api\\person\\person_set.yaml')
+        set_param2 = YamlReader.read_yaml('data\\api\\person\\person_set2.yaml')
+        i = deviceid({"deviceName":name})
         taskId_list = []
         if i:
             for output_Type in outputType.split(','):
@@ -96,7 +95,7 @@ class task_person():
     def del_persontask(self,name,outputType,taskId):
         '''删除行人行为任务'''
         path = os.path.abspath(os.getcwd())
-        del_param = GetYaml().yaml_json('datas\\person\\person_del.yaml')
+        del_param = YamlReader.read_yaml('data\\api\\person\\person_del.yaml')
         path = path + '\\datas\\taskid\\person'
         id = deviceid(name)
         for root,dirs,files in os.walk(path,topdown=False):

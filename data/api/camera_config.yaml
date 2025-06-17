@@ -1,0 +1,179 @@
+{
+                        "_comment": "第一个相机，cameraName可以从视图汇聚平台获取相机名称,refDeviceCameraId第三方设备编号不是必填项，不传参的字段删除即可,topic为消息主题长度限制1-64字节(例如OUTPUT_CAPTURE_BODY),time为任务运行时间,若不传参则视为立即执行直到删除任务",
+                        "cameraName": "玩手机-test-250",
+                        "refDeviceCameraId": "第三方设备编号1",
+                        "vehiclebehavior": {
+                            "topic": "vehiclebehavior_SJ",
+                            "_comment": "车辆行为，不需要解析的字段整体删除即可,多个行为用英文,隔开,参数枚举:1 交通拥堵,2 车辆违停,3 非车违停,4 消防通道违停,5 逆行,6 交通事故,7 车流量,direction当type为5时必填,参数为2个坐标点是车辆行驶方向 [[x1,y1],[x2,y2]],vehicleFlowDirection当type为7车流量的时候必传,[[x1,y1],[x2,y2],[x3,y3],[x4,y4],[x5,y5]],表示当前roi区域中车辆的直行起始点[x1,y1],直行结束点[x2,y2],左转结束点[x3,y3],右转结束点,[x4,y4],掉头结束点坐标[x5,y5],roi区域可传多个个坐标点,roiOrder字段按照顺序排序即可",
+                            "type": "5,7",
+                            "direction": "1,1,2,2",
+                            "vehicleFlowDirection": [
+                                [234,543],
+                                [675,1067],
+                                [230,543],
+                                [675,1067],
+                                [123,765]
+                                            ],
+                            "roi": [
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 0
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 1
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 2
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 3
+                                }
+                            ],
+                            "time": [
+                            {
+                                "starttime": "15:17:00",
+                                "endtime": "15:18:50"
+                            },
+                            {
+                                "starttime": "14:40:40",
+                                "endtime": "14:41:20"
+                            }
+                        ]
+                        },
+                        "personbehavior": {
+                            "topic": "personbehavior_SJ",
+                            "_comment": "行人行为，不需要解析则此字段整体删除即可,多个行为用英文,隔开，参数枚举:4:呼救 5:打架 8:吸烟 9:打电话 11:离岗(需要传入roi) 12:玩手机 18:跌倒 19:睡岗 28:聚集(需要传入roi,且peopleNumberMaxThreshold和peopleNumberMinThreshold必填),当type为28聚集任务时,peopleNumberMaxThreshold,peopleNumberMinThreshold必填(int型)不传参此字段删除即可,roi区域可传多个个坐标点,roiOrder字段按照顺序排序即可,不传参此字段删除即可",
+                            "type": "12",
+                            "peopleNumberMaxThreshold": 9,
+                            "peopleNumberMinThreshold": 1,
+                            "roi": [
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 0
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 1
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 2
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 3
+                                },
+                                {
+                                    "x": 12,
+                                    "y": 22,
+                                    "roiOrder": 4
+                                }
+                            ],
+                            "time": [
+                            {
+                                "starttime": "18:10:50",
+                                "endtime": "18:12:20"
+                            }
+                                    ]
+                        },
+                        "scenario": {
+                            "topic": "scenario_SJ",
+                            "_comment": "场景行为，不需要解析则此字段整体删除即可,多个行为用英文,隔开,参数枚举:1 明火检测,2 道路破损,3 道路垃圾,4 道路障碍物,5 遗失物品,6 道路堵塞,7 房屋缺损,roi区域可传多个个坐标点,roiOrder字段按照顺序排序即可",
+                            "type": "8",
+                            "roi": [
+                                  {
+                                    "roiOrder": 0,
+                                    "x": 162,
+                                    "y": 840
+                                  },
+                                  {
+                                    "roiOrder": 1,
+                                    "x": 1667,
+                                    "y": 840
+                                  },
+                                  {
+                                    "roiOrder": 2,
+                                    "x": 1667,
+                                    "y": 164
+                                  },
+                                  {
+                                    "roiOrder": 3,
+                                    "x": 162,
+                                    "y": 164
+                                  }
+                            ],
+                            "time": [
+                            {
+                                "starttime": "15:58:00",
+                                "endtime": "16:05:50"
+                            },
+                            {
+                                "starttime": "16:10:40",
+                                "endtime": "16:11:20"
+                            }
+                        ]
+                        },
+                        "headShoulder": {
+                            "topic": "headShoulder",
+                            "_comment": "头肩解析，不需要解析则此字段整体删除即可,参数枚举：1-人群密度（静态模式） 2-客流统计（动态模式） 4-安全帽检测,roi区域可传多个个坐标点,roiOrder字段按照顺序排序即可",
+                            "type": "1,2",
+                            "roi": [
+                                {
+                                        "roiOrder": 0,
+                                        "x": 320,
+                                        "y": 888
+                                      },
+                                {
+                                        "roiOrder": 1,
+                                        "x": 1359,
+                                        "y": 888
+                                      },
+                                {
+                                        "roiOrder": 2,
+                                        "x": 1359,
+                                        "y": 168
+                                      },
+                                {
+                                        "roiOrder": 3,
+                                        "x": 320,
+                                        "y": 168
+                                      }
+                                    ],
+                            "time": [
+                               {
+                                "starttime": "15:58:50",
+                                "endtime": "15:59:50"
+                            },
+                               {
+                                "starttime": "16:10:00",
+                                "endtime": "16:13:00"
+                            }
+                                    ]
+                        },
+                        "snapshot": {
+                            "topic": "snapshot",
+                            "_comment": "实时解析，不需要解析则此字段整体删除即可,参数枚举：0-人脸，1-人体，2-车辆，3-非车",
+                            "type": "0",
+                            "time": [
+                            {
+                                "starttime": "15:57:50",
+                                "endtime": "15:58:20"
+                            },
+                            {
+                                "starttime": "16:20:00",
+                                "endtime": "16:22:00"
+                            }
+                        ]
+                        }
+}

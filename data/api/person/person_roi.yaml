@@ -1,0 +1,20 @@
+deviceId:
+roiParams:
+  - behaviorType:
+    width: 1920
+    height: 1080
+    areas:
+      - roiId:
+        points:
+          - x: 100
+            y: 100
+            roiOrder: 0
+          - x: 100
+            y: 1000
+            roiOrder: 1
+          - x: 1800
+            y: 1000
+            roiOrder: 2
+          - x: 1800
+            y: 100
+            roiOrder: 3

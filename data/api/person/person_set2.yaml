@@ -1,0 +1,8 @@
+topic: test-person
+deviceId:
+alarmInterval: 60000
+eventDuration: 290
+task:
+  outputType:
+  scheduleType: 0
+
